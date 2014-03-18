@@ -5,7 +5,7 @@ import com.imessage.model.ReplyInfo;
 
 public interface FeedCommentService {
 	/**
-	 * 回复feed类
+	 * 回复feed
 	 * 
 	 * @param feedId
 	 * @param comment
