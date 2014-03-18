@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hdp="http://www.springframework.org/schema/hadoop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop-1.0.xsd">
+
+	<!-- ++++++++++++++Redis+++++++++++++++ -->
+	<bean id="jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="usePool" value="true" />
+	</bean>
+
+	<!-- redis template definition -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnFactory" />
+	</bean>
+
+	<!-- ++++++++++++++Hadoop+++++++++++++++ -->
+<!-- 	<hdp:configuration id="hadoopConfiguration" /> -->
+<!-- 	<hdp:file-system id="hdfs" uri="${hdfs.url}" configuration-ref="hadoopConfiguration" /> -->
+
+<!-- 	<bean id="simplerFileSystem" class="org.springframework.data.hadoop.fs.SimplerFileSystem"> -->
+<!-- 		<constructor-arg index="0" ref="hdfs" /> -->
+<!-- 	</bean> -->
+
+</beans>
