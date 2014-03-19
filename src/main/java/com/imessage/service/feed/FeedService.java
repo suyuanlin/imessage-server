@@ -1,7 +1,9 @@
 package com.imessage.service.feed;
 
+import com.imessage.model.IFeedProvider;
+import com.imessage.model.MessageInfo;
 import com.imessage.model.PK;
-import com.imessage.model.feed.IFeedProvider;
+import com.imessage.model.Pagination;
 
 public interface FeedService extends FeedCommentService {
 	/**
@@ -12,4 +14,6 @@ public interface FeedService extends FeedCommentService {
 	 * @return
 	 */
 	String publishFeed(IFeedProvider feedProvider, String feedLink, PK pk);
+	
+	Pagination<MessageInfo> getFeedMessage(int pageIndex, int pageSize);
 }
