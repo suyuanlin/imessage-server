@@ -14,11 +14,10 @@ import com.imessage.model.IFeedProvider;
 import com.imessage.model.PK;
 import com.imessage.model.User;
 import com.imessage.model.feed.FeedEvent;
+import com.imessage.service.feed.Constants;
 
 public class KVFeedPushThread extends Thread {
 	private static final Log log = LogFactory.getLog(KVFeedPushThread.class);
-
-	private static final String NS_FEED = "sirius:feed:";
 
 	private final RedisTemplate<String, String[]> redisTemplate;
 	private final User user;
@@ -78,7 +77,7 @@ public class KVFeedPushThread extends Thread {
 		feedEvent.setServiceLink(feedLink);
 
 		//
-		BoundZSetOperations<String, String[]> boundZSetOps = redisTemplate.boundZSetOps(NS_FEED + otherId);
+		BoundZSetOperations<String, String[]> boundZSetOps = redisTemplate.boundZSetOps(Constants.NS_FEED + otherId);
 		boundZSetOps.add(
 				new String[] { feedProvider.getServiceName(),
 						JSON.toJSONString(feedEvent, SerializerFeature.UseSingleQuotes), feedEvent.getSid() },

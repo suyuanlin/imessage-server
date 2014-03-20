@@ -23,16 +23,13 @@ import com.imessage.model.PK;
 import com.imessage.model.Pagination;
 import com.imessage.model.ReplyInfo;
 import com.imessage.model.User;
+import com.imessage.service.feed.Constants;
 import com.imessage.service.feed.FeedService;
 
 @Service
 public class KVFeedServiceImpl implements FeedService {
 
 	private static final Log log = LogFactory.getLog(KVFeedServiceImpl.class);
-
-	private static final String NS_FEED_IS_LIKE = "imessage:feed:islike:%s:%s:%s";
-	private static final String NS_FEED_LIKE = "imessage:feed:like:%s:%s";
-	private static final String NS_FEED = "imessage:feed:";
 
 	private static final ExecutorService THREAD_POOL = Executors.newFixedThreadPool(Runtime.getRuntime()
 			.availableProcessors());
@@ -98,7 +95,7 @@ public class KVFeedServiceImpl implements FeedService {
 		User user = new User();
 		user.setUserId("1");
 		user.setUserName("zhangsan");
-		String key = KVFeedServiceImpl.NS_FEED + user.getUserId();
+		String key = Constants.NS_FEED + user.getUserId();
 		BoundZSetOperations<String, String[]> boundZSetOps = feedMessageTemplate.boundZSetOps(key);
 
 		Set<String[]> range = boundZSetOps.range(start, end);
