@@ -27,11 +27,11 @@ public class SayController {
 	 * @return
 	 */
 	@RequestMapping("manage/shareSay")
-	public ModelAndView shareSay(HttpServletRequest request, String context) {
+	public ModelAndView shareSay(HttpServletRequest request, String context,String title) {
 		MessageInfo say = new MessageInfo();
 		say.setMessageContext(context);
-		say.setCreateUserId("1");
-		say.setMessageId("1");
+		say.setCreateUserId(request.getLocalAddr()+request.getLocalName());
+		say.setTitle(title);
 		feedService.publishFeed(messageInfoService, StringUtils.EMPTY, say);
 		return new ModelAndView();
 	}
