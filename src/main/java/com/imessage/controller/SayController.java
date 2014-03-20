@@ -23,13 +23,13 @@ public class SayController {
 	/**
 	 * 发表日志
 	 * @param request
-	 * @param context
+	 * @param messageContext
 	 * @return
 	 */
 	@RequestMapping("manage/shareSay")
-	public ModelAndView shareSay(HttpServletRequest request, String context,String title) {
+	public ModelAndView shareSay(HttpServletRequest request, String messageContext,String title) {
 		MessageInfo say = new MessageInfo();
-		say.setMessageContext(context);
+		say.setMessageContext(messageContext);
 		say.setCreateUserId(request.getLocalAddr()+request.getLocalName());
 		say.setTitle(title);
 		feedService.publishFeed(messageInfoService, StringUtils.EMPTY, say);
