@@ -15,5 +15,11 @@ public interface FeedService extends FeedCommentService {
 	 */
 	String publishFeed(IFeedProvider feedProvider, String feedLink, PK pk);
 	
+	/**
+	 * 获取消息
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
 	Pagination<MessageInfo> getFeedMessage(int pageIndex, int pageSize);
 }

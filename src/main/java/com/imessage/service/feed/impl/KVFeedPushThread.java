@@ -78,10 +78,8 @@ public class KVFeedPushThread extends Thread {
 
 		//
 		BoundZSetOperations<String, String[]> boundZSetOps = redisTemplate.boundZSetOps(Constants.NS_FEED + otherId);
-		boundZSetOps.add(
-				new String[] { feedProvider.getServiceName(),
-						JSON.toJSONString(feedEvent, SerializerFeature.UseSingleQuotes), feedEvent.getSid() },
-				-date.getTime());
+		boundZSetOps.add(new String[] { feedProvider.getServiceName(),JSON.toJSONString(feedEvent, SerializerFeature.UseSingleQuotes), feedEvent.getSid()},	-date.getTime());
+		
 		return sid;
 	}
 }

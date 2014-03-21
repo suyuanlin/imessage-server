@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.alibaba.fastjson.JSON;
+import com.imessage.model.AuthContextHolder;
 import com.imessage.model.IFeedProvider;
 import com.imessage.model.MessageInfo;
 import com.imessage.model.PK;
@@ -71,9 +72,8 @@ public class KVFeedServiceImpl implements FeedService {
 			log.debug(String.format("业务%s推送消息数据%s模板%s", feedProvider.getServiceName(), pk, feedProvider.getTemplate()));
 		}
 
-		User user = new User();
-		user.setUserId("1");
-		user.setUserName("zhangsan");
+		User user = AuthContextHolder.getAuthContext().getUser();
+		
 		Set<String> set = new HashSet<String>();
 		KVFeedPushThread thread = new KVFeedPushThread(feedMessageTemplate, user, set, feedProvider, feedLink, pk);
 		THREAD_POOL.execute(thread);
@@ -92,9 +92,8 @@ public class KVFeedServiceImpl implements FeedService {
 		long end = pageIndex * pageSize;
 		long start = end - pageSize;
 
-		User user = new User();
-		user.setUserId("1");
-		user.setUserName("zhangsan");
+		User user = AuthContextHolder.getAuthContext().getUser();
+		
 		String key = Constants.NS_FEED + user.getUserId();
 		BoundZSetOperations<String, String[]> boundZSetOps = feedMessageTemplate.boundZSetOps(key);
 
