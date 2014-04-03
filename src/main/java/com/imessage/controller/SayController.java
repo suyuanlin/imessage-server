@@ -30,7 +30,7 @@ public class SayController {
 	 * @param messageContext
 	 * @return
 	 */
-	@RequestMapping("manage/shareSay")
+	@RequestMapping("shareSay")
 	public String shareSay(HttpServletRequest request, String messageContext,String title) {
 		setUser(request);
 		MessageInfo say = new MessageInfo();
